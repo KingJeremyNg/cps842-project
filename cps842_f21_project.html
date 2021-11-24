@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html><head></head><body>
+
+
+
+
+
+<center>
+<h2>CPS842: Information Retrieval and Web Search</h2>
+
+<h2>Fall 2021</h2>
+</center>
+<hr/>
+
+<center><h3>Project (Due: Dec. 12, 2021)</h3></center>
+
+<p><u>Project Ideas:</u><br/>
+You can choose the project idea from the following list, or propose your own as long as it is related to the course topic and the workload is adequate. In the latter case, you need to email me a short proposal by <b>Nov. 18, 2021</b>.</p>
+
+<p>1.
+Build your own search engine. You can develop your own crawler or use an existing crawler such as <a rel="noopener" href="http://nutch.apache.org/" target="_blank">Nutch</a> to crawl the web. You can decide the starting seed set, which could be a set of pages you are interested in, or pages from web directories. You can use a HTML parser to parse the HTML pages and then use your indexing program from assignment 1 to build the inverted index. You may need to modify the program because the web collection is different from the CACM collection. Your search engine should have a web interface to accept keyword-based queries. The results returned to the user should be ranked. You can use the vector space model to implement the ranking algorithm. You should also implement a link-based ranking algorithm such as PageRank. The final ranking score would be the combination of the two, for example, score(d, q) = w1*cos-score(d, q) + w2*pagerank(d) where w1+w2=1. You can implement the PageRank algorithm by yourself or use an existing implementation (e.g., <a rel="noopener" href="http://jung.sourceforge.net/doc/api/edu/uci/ics/jung/algorithms/scoring/PageRank.html" target="_blank">Jung</a>). In the latter case, you need to cite the source in your report. 
+</p>
+<p>
+<i>Note:</i>
+You can restrict your search engine to only support HTML pages. Also, you can focus on a particular domain. You should download minimum 500 web pages. The crawler program should be separate so that you don&#39;t need to run it during the demo.
+</p>
+
+<p>2.
+Implement a movie recommender system. Set up a web site in which a user can rate a movie he/she has watched. You can import the movie titles and other related information from IMDB. The rating is a number between 0 and 5. After you collect a certain amount of ratings from users, you can run the recommender system, which will then base on the previous ratings given by the user, recommend new movies to the user. You can also import an existing rating dataset (e.g. MovieLens), in this case, a web interface for users to rate a movie is still required. You can implement one of the recommendation algorithms we have learned in class (e.g., content-based, user/item-based collaborative filtering algorithm). You are also welcome to compare your model with other popular recommendation models (e.g., Matrix Factorization, Deep Neural Network). For other models, you can use an existing library. For comparison, you can report the RMSE and precision/recall values of different algorithms when running on a certain dataset.
+</p>
+<p>
+<i>Note:</i>
+You have to implement at least one recommendation algorithm by yourself (without using an existing library). Your program should have a basic user management function, e.g., for a user to register, log in, etc. 
+</p>
+
+<p>3.
+Implement a document clustering system. The dataset can be downloaded here: <a rel="noopener" href="http://mlg.ucd.ie/datasets/bbc.html" target="_blank">http://mlg.ucd.ie/datasets/bbc.html</a>. There are two datasets, one is BBC news and the other is BBC Sports news. You can choose either one, please download the raw text files. There are 5 classes of articles in each dataset. These class labels can be used as the gold standard when you measure the external evaluation metrics. You can use the programs from the two assignments (with some modifications) to process the documents and build the TFIDF weight vectors for these documents. Then, you can implement one of the clustering algorithms and run it on this dataset. Two options are: k-means clustering and hierachical agglomerateive clustering (with a selected similarity threshold, you can also get k clusters). Calculate the following metrics: tightness of each cluster (sum of squared distances between each document in the cluster and the centroid of the cluster), one of the external criteria (purity or rand index). 
+</p>
+<p>
+<i>Note:</i>
+Interface is required. The input required from the user is the k value. After you run the program, the output should be the clustered results (e.g., similar to the Scatter/Gather example we show in class). For each cluster, show the cluster ID, 5 terms with the highest TFIDF scores (the combined scores from all the documents in the cluster), and all the documents (ID + title) in the cluster. Please also show the actual class label beside each document. At the end, you need to show the values of the chosen metrics.
+</p>
+
+<p><u>Requirements:</u><br/>
+You should submit a zipped file (i.e. cps842f21_prj_yourlastname.zip) to the course web site, including the report (e.g. the functions implemented in your system, the detailed design of your system, etc.), the source code of all programs, the executable programs and the result files (the search interface and results for a few queries for the project idea 1, the collected user rating data and the user similarity matrix in the project idea 2, and the evaluation metrics for the project idea 3). 
+</p>
+
+<p>
+You need to do a demonstration after the due date (the information for demo will be posted later).
+</p>
+
+<p>
+This project could be done in groups of 2 or 3 students. Individual work is also fine. One group only needs to do one submission. Please make sure you include all group members&#39; names in the report.
+</p>
+
+
+
+
+<script type="text/javascript" src="/d2l/common/math/MathML.js?v=20.21.10.32920 "></script><script type="text/javascript">document.addEventListener('DOMContentLoaded', function() { D2LMathML.DesktopInit('https://s.brightspace.com/lib/mathjax/2.7.4/MathJax.js?config=MML_HTMLorMML','https://s.brightspace.com/lib/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML','130',true); });</script></body></html>
