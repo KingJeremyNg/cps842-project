@@ -29,7 +29,7 @@ class invert {
     }
 
     parse(text) {
-        const chars = ["'s", "'", "-", ".", "(", ")", "{", "}", "[", "]", ":", ";", ",", '"', "*", "/", "?", "!", "$", "`"];
+        const chars = ["'s", "'", "-", ".", "(", ")", "{", "}", "[", "]", ":", ";", ",", '"', "*", "/", "?", "!", "$", "`", "~"];
         const operators = {
             "<=": " less than or equal to ",
             ">=": " greater than or equal to ",
@@ -85,12 +85,24 @@ class invert {
         fs.writeFileSync(filePath, JSON.stringify(this.data));
     }
 
-    createDictionary(filePath) {
-
-    }
-
-    createPostingsLists(filePath) {
-
+    createOutput(dictPath, postingsPath) {
+        let dictionary = {};
+        let postingsList = {};
+        for (const [group, animes] of Object.entries(this.data)) {
+            for (const [index, anime] of Object.entries(animes)) {
+                let position = 1;
+                anime["stemmed"].forEach((term) => {
+                    if (!dictionary[term]) dictionary[term] = 0;
+                    dictionary[term] += 1;
+                    if (!postingsList[term]) postingsList[term] = {}
+                    if (!postingsList[term][index]) postingsList[term][index] = [];
+                    postingsList[term][index].push(position);
+                    position++;
+                })
+            }
+        }
+        fs.writeFileSync(dictPath, JSON.stringify(dictionary));
+        fs.writeFileSync(postingsPath, JSON.stringify(postingsList));
     }
 }
 
