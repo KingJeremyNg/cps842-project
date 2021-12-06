@@ -1,8 +1,8 @@
-const stemmer = require('porter-stemmer').stemmer;
 const fs = require('fs');
 
 const scraperObject = {
     url: 'https://myanimelist.net/topanime.php?limit=0',
+    prev: 'https://myanimelist.net/topanime.php?limit=0',
     scrapedData: {},
 
     async scraper(browser) {
@@ -24,6 +24,7 @@ const scraperObject = {
                 return links;
             }));
             // Get the next page link
+            this.prev = this.url;
             this.url = await page.$$eval('div > h2 > span > a', links => {
                 try {
                     return links.filter(link => link.textContent.includes("Next 50"))[0].href;
@@ -66,11 +67,11 @@ const scraperObject = {
                         if (temp[3] == "anime") scraped['related'].push(temp[4]);
                     });
 
-                    scraped['altTitle'] = [];
+                    scraped['altTitle'] = "";
                     document.querySelectorAll('.js-alternative-titles > div').forEach((el) => {
                         let title = el.textContent.replace(/^\s+|\s+$/g, '').split(" ");
                         title.shift();
-                        scraped['altTitle'].push(title.join(" "));
+                        scraped['altTitle'] = (title.join(" "));
                     });
 
                     return scraped;
@@ -80,14 +81,16 @@ const scraperObject = {
                 resolve(data);
             })
 
+            let group = "group" + this.prev.split("=")[1];
+            this.scrapedData[group] = {};
+
             for (link in urls) {
                 // if (link == 3) {
                 //     break;
                 // }
                 console.log(`Navigating to ${urls[link]}`);
-                let currentPageData = await pagePromise(urls[link]);
                 let index = urls[link].split("/")[4];
-                this.scrapedData[index] = currentPageData;
+                this.scrapedData[group][index] = await pagePromise(urls[link]);
             }
 
             if (!this.url) break;
