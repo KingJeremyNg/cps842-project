@@ -1,7 +1,7 @@
 const stemmer = require('porter-stemmer').stemmer;
 const fs = require('fs');
 
-class invert {
+class Invert {
     constructor(data) {
         this.data = data;
         this.stopWords = [];
@@ -91,13 +91,15 @@ class invert {
         for (const [group, animes] of Object.entries(this.data)) {
             for (const [index, anime] of Object.entries(animes)) {
                 let position = 1;
+                let seen = new Set();
                 anime["stemmed"].forEach((term) => {
                     if (!dictionary[term]) dictionary[term] = 0;
-                    dictionary[term] += 1;
+                    if (!seen.has(term)) dictionary[term] += 1;
                     if (!postingsList[term]) postingsList[term] = {}
                     if (!postingsList[term][index]) postingsList[term][index] = [];
                     postingsList[term][index].push(position);
                     position++;
+                    seen.add(term);
                 })
             }
         }
@@ -106,4 +108,4 @@ class invert {
     }
 }
 
-module.exports = invert;
+module.exports = Invert;

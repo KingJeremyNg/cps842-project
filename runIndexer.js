@@ -1,9 +1,9 @@
 var json = require('./data/collection.json');
-var invert = require('./src/invert');
+var Invert = require('./src/invert.js');
 
-let invertModel = new invert(json);
+let invertModel = new Invert(json);
 invertModel.loadStopWords("./data/common_words");
 invertModel.stem();
 // console.log(invertModel.getAnime("1"));
 invertModel.saveData("./data/collection2.json");
-invertModel.createOutput("./data/dictionary.json", "./data/postingsLists.json")
+invertModel.createOutput("./data/dictionary.json", "./data/postingsLists.json");

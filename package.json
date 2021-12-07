@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "scraper": "node runScraper.js",
-    "index": "node runIndexer.js"
+    "index": "node runIndexer.js",
+    "eval": "node runEval.js"
   },
   "repository": {
     "type": "git",
