@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "scraper": "node runScraper.js",
     "index": "node runIndexer.js",
-    "eval": "node runEval.js"
+    "eval": "node runEval.js",
+    "bundle": "browserify index.js -o bundle.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +22,7 @@
   },
   "homepage": "https://github.com/KingJeremyNg/cps842-project#readme",
   "dependencies": {
+    "browserify": "^17.0.0",
     "porter-stemmer": "^0.9.1",
     "puppeteer": "^11.0.0"
   }

@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 class PageRank {
     constructor(data, alpha) {
         this.data = data;
@@ -8,6 +6,13 @@ class PageRank {
         this.N = 0;
         this.matrix = [];
         this.score = [];
+    }
+
+    createMatrix() {
+        this.convertIndex();
+        this.buildMatrix();
+        this.directMatrix();
+        this.updateMatrix();
     }
 
     convertIndex() {
@@ -58,19 +63,28 @@ class PageRank {
         }
     }
 
-    calculateProbability(start, iterations) {
-        let x = this.matrix[this.references[start]];
-        let result = this.matrix[this.references[start]];
+    getRndInteger(min, max) {
+        return Math.floor(Math.random() * (max - min)) + min;
+    }
+
+    calculateProbability(iterations) {
+        let start = this.getRndInteger(0, this.N);
+        let x = this.matrix[start];
+        let result = this.matrix[start];
         for (let i = 1; i < iterations; i++) {
             result = []
             for (let j = 0; j < this.N; j++) {
                 let sum = 0;
                 for (let k = 0; k < this.N; k++) {
-                    sum += x[j] * this.matrix[this.references[start]][k];
+                    sum += x[j] * this.matrix[start][k];
                 }
                 result.push(sum);
             }
             x = result;
+        }
+        let max = Math.max(...result);
+        for (let i = 0; i < result.length; i++) {
+            result[i] /= max;
         }
         this.score = result;
     }
